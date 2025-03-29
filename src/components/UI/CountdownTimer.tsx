@@ -9,10 +9,14 @@ interface TimeLeft {
   seconds: number;
 }
 
-export const CountdownTimer = () => {
+interface CountdownTimerProps {
+  onDateClick: (date: number) => void;
+}
+
+export const CountdownTimer = ({ onDateClick }: CountdownTimerProps) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [showCelebration, setShowCelebration] = useState(false);
-  const [easterEgg, setEasterEgg] = useState<{ message: string, date: string } | null>(null);
+  
   const celebrationDuration = 5000; 
 
   useEffect(() => {
@@ -78,9 +82,8 @@ export const CountdownTimer = () => {
               `}
               onClick={() => {
                 if (date === 23) setShowCelebration(true);
-                if (date === 22) setEasterEgg({ message: '🎂 Our Birthday!', date: '22/10/1998' });
-                if (date === 24) setEasterEgg({ message: '💍 Engagement Day!', date: '24/10/2024' });
-                if (date === 26) setEasterEgg({ message: '📜 Arat El Fat7a', date: '26/07/2024' });
+
+                onDateClick(date)
               }}
             >
               {date === 23 ? (
@@ -123,31 +126,7 @@ export const CountdownTimer = () => {
           )}
         </AnimatePresence>
 
-        {/* Easter Egg Popup */}
-        <AnimatePresence>
-          {easterEgg && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-lg"
-            >
-              <div className="absolute top-1 left-1 sm:top-2 sm:left-2 p-1 sm:p-2 text-xs sm:text-sm text-gray-700 font-semibold">
-                {easterEgg.date}
-              </div>
-              <button 
-                onClick={() => setEasterEgg(null)} 
-                className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-gray-200 rounded-full p-1 sm:p-2 hover:bg-gray-300"
-              >
-                <X size={16} className="sm:w-5 sm:h-5" />
-              </button>
-              <div className="text-xl sm:text-2xl font-bold text-gray-700 mt-4 text-center">
-                {easterEgg.message}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
       </div>
     </div>
   );
