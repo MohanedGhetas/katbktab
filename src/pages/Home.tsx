@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { CountdownTimer } from '../components/UI/CountdownTimer';
 import { Calendar, Heart, MapPin, Clock } from 'lucide-react';
 import { PhotoGallery } from '../components/UI/PhotoGallery';
+import Weddingbackground  from '../images/sora3.jpg';
 
 export const Home = () => {
   return (
@@ -10,7 +11,7 @@ export const Home = () => {
       <section id="home" className="relative h-screen pt-16">
         <div className="absolute inset-0 overflow-hidden hero-image">
           <img
-            src="/src/images/sora3.jpg"
+            src={Weddingbackground}
             alt="Wedding background"
             className="w-full h-full object-cover opacity-20"
           />

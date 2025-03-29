@@ -9,6 +9,13 @@ export const Navigation = () => {
     restDelta: 0.001
   });
 
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <motion.div className="progress-bar" style={{ scaleX }} />
@@ -20,9 +27,15 @@ export const Navigation = () => {
           </div>
           
           <div className="hidden md:flex space-x-8">
-            <a href="#home" className="text-gray-600 hover:text-rose-500 transition-colors">Home</a>
-            <a href="#countdown" className="text-gray-600 hover:text-rose-500 transition-colors">Countdown</a>
-            <a href="#location" className="text-gray-600 hover:text-rose-500 transition-colors">Location</a>
+            <button onClick={() => scrollToSection('home')} className="text-gray-600 hover:text-rose-500 transition-colors">
+              Home
+            </button>
+            <button onClick={() => scrollToSection('countdown')} className="text-gray-600 hover:text-rose-500 transition-colors">
+              Countdown
+            </button>
+            <button onClick={() => scrollToSection('location')} className="text-gray-600 hover:text-rose-500 transition-colors">
+              Location
+            </button>
           </div>
         </div>
       </nav>
