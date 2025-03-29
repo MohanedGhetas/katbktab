@@ -63,7 +63,7 @@ export const CountdownTimer = () => {
       {/* Calendar */}
       <div className="bg-white rounded-lg sm:rounded-xl shadow-md sm:shadow-xl p-4 sm:p-6 md:p-8 w-full max-w-md sm:max-w-lg md:max-w-2xl transform hover:scale-[1.02] transition-transform duration-300 relative">
         <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center mb-2 sm:mb-4">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+          {['Thu', 'Fri', 'Sat','Sun', 'Mon', 'Tue', 'Wed'].map(day => (
             <div key={day} className="text-xs sm:text-sm font-medium text-gray-600">{day}</div>
           ))}
         </div>
@@ -71,10 +71,11 @@ export const CountdownTimer = () => {
           {Array.from({ length: 31 }, (_, i) => i + 1).map(date => (
             <div
               key={date}
-              className={`text-xs sm:text-sm p-1 sm:p-2 rounded-full transition-all duration-300 cursor-pointer ${
-                date === 23 ? 'bg-rose-500 text-white ring-2 sm:ring-4 ring-rose-200 transform hover:scale-110 hover:rotate-12' :
-                date === 22 || date === 24 || date === 26 ? 'hover:bg-gray-200' : 'hover:bg-gray-100'
-              }`}
+              className={`relative flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full transition-all duration-300 cursor-pointer
+                ${date === 23 ? 'transform hover:scale-110 hover:rotate-12' : ''}
+                ${[22, 24, 26].includes(date) ? 'text-black ring-2 sm:ring-4 ring-rose-200 transform hover:scale-110 hover:text-white hover:bg-rose-500' : ''}
+                ${date !== 23 && ![22, 24, 26].includes(date) ? 'hover:bg-gray-100' : ''}
+              `}
               onClick={() => {
                 if (date === 23) setShowCelebration(true);
                 if (date === 22) setEasterEgg({ message: '🎂 Our Birthday!', date: '22/10/1998' });
@@ -82,7 +83,21 @@ export const CountdownTimer = () => {
                 if (date === 26) setEasterEgg({ message: '📜 Arat El Fat7a', date: '26/07/2024' });
               }}
             >
-              {date}
+              {date === 23 ? (
+                <div className="relative w-full h-full">
+                  {/* Heart SVG */}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="rgb(244 63 94 / 1)"
+                    className="w-full h-full">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                  {/* Centered Number */}
+                  <span className="absolute inset-0 flex items-center justify-center text-xs sm:text-sm font-bold hover:text-rose-500">
+                    23
+                  </span>
+                </div>
+              ) : (
+                <span className="text-xs sm:text-sm font-semibold">{date}</span>
+              )}
             </div>
           ))}
         </div>
