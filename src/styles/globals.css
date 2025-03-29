@@ -8,6 +8,7 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1rem); /* Base font responsive sizing */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -28,11 +29,15 @@
   }
 
   .heading-primary {
-    @apply text-4xl md:text-5xl lg:text-6xl font-serif text-gray-800 mb-4;
+    @apply font-serif text-gray-800 mb-4;
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive between 2rem and 3.5rem */
+    line-height: clamp(2.5rem, 6vw, 4rem);
   }
 
   .heading-secondary {
-    @apply text-3xl font-serif text-gray-800 mb-6;
+    @apply font-serif text-gray-800 mb-6;
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem); /* Responsive between 1.5rem and 2.25rem */
+    line-height: clamp(1.8rem, 4vw, 2.5rem);
   }
 }
 
@@ -77,4 +82,23 @@
 
 .loading-spinner {
   @apply w-12 h-12 border-4 border-rose-200 border-t-rose-500 rounded-full animate-spin;
+}
+
+/* Additional responsive text utilities */
+@layer utilities {
+  .text-responsive-sm {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+  
+  .text-responsive-md {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+  }
+  
+  .text-responsive-lg {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+  }
+  
+  .text-responsive-xl {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
 }

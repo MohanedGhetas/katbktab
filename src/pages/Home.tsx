@@ -24,11 +24,11 @@ export const Home = () => {
           className="relative h-full flex items-center justify-center"
         >
           <div className="text-center">
-            <Heart className="w-16 h-16 text-rose-500 mx-auto mb-8 float" />
+            <Heart className="w-16 h-16 text-rose-500 mx-auto mb-4 lg:mb-8 float" />
             <h1 className="heading-primary">
               Mohaned & Yasmine
             </h1>
-            <p className="text-2xl text-gray-600 font-light">
+            <p className="text-gray-600 font-light">
               Request the pleasure of your company
             </p>
             <div className="mt-8 space-y-2 text-gray-700">

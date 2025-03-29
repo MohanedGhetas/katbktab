@@ -43,34 +43,36 @@ export const CountdownTimer = () => {
   }, [showCelebration]);
 
   return (
-    <div className="flex flex-col items-center gap-8">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+    <div className="flex flex-col items-center gap-4 md:gap-8 px-4 w-full">
+      {/* Countdown Timer */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 w-full max-w-3xl">
         {Object.entries(timeLeft).map(([unit, value], index) => (
           <motion.div
             key={unit}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-lg shadow-lg p-4 text-center"
+            className="bg-white rounded-lg shadow-md sm:shadow-lg p-2 sm:p-4 text-center"
           >
-            <div className="text-3xl md:text-4xl font-bold text-rose-500">{value}</div>
-            <div className="text-gray-600 capitalize">{unit}</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-500">{value}</div>
+            <div className="text-xs sm:text-sm text-gray-600 capitalize">{unit}</div>
           </motion.div>
         ))}
       </div>
 
-      <div className="bg-white rounded-xl shadow-xl p-8 transform hover:scale-105 transition-transform duration-500 relative">
-        <div className="grid grid-cols-10 gap-2 text-center mb-4">
+      {/* Calendar */}
+      <div className="bg-white rounded-lg sm:rounded-xl shadow-md sm:shadow-xl p-4 sm:p-6 md:p-8 w-full max-w-md sm:max-w-lg md:max-w-2xl transform hover:scale-[1.02] transition-transform duration-300 relative">
+        <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center mb-2 sm:mb-4">
           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-            <div key={day} className="font-medium text-gray-600">{day}</div>
+            <div key={day} className="text-xs sm:text-sm font-medium text-gray-600">{day}</div>
           ))}
         </div>
-        <div className="grid grid-cols-10 gap-2 text-center">
+        <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center">
           {Array.from({ length: 31 }, (_, i) => i + 1).map(date => (
             <div
               key={date}
-              className={`p-2 rounded-full transition-all duration-300 cursor-pointer ${
-                date === 23 ? 'bg-rose-500 text-white ring-4 ring-rose-200 transform hover:scale-110 hover:rotate-12' :
+              className={`text-xs sm:text-sm p-1 sm:p-2 rounded-full transition-all duration-300 cursor-pointer ${
+                date === 23 ? 'bg-rose-500 text-white ring-2 sm:ring-4 ring-rose-200 transform hover:scale-110 hover:rotate-12' :
                 date === 22 || date === 24 || date === 26 ? 'hover:bg-gray-200' : 'hover:bg-gray-100'
               }`}
               onClick={() => {
@@ -93,12 +95,15 @@ export const CountdownTimer = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.5 }}
-              className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 p-6 rounded-xl shadow-xl"
+              className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-lg"
             >
-              <div className="absolute top-2 right-2 bg-gray-200 rounded-full p-2 hover:bg-gray-300 cursor-pointer" onClick={() => setShowCelebration(false)}>
-                <X size={20} />
+              <div 
+                className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-gray-200 rounded-full p-1 sm:p-2 hover:bg-gray-300 cursor-pointer" 
+                onClick={() => setShowCelebration(false)}
+              >
+                <X size={16} className="sm:w-5 sm:h-5" />
               </div>
-              <div className="text-2xl font-bold text-rose-500 mt-4">🎉 Wedding Day! 🎉</div>
+              <div className="text-xl sm:text-2xl font-bold text-rose-500 mt-4 text-center">🎉 Wedding Day! 🎉</div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -111,13 +116,20 @@ export const CountdownTimer = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.5 }}
-              className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 p-6 rounded-xl shadow-xl"
+              className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 p-4 sm:p-6 rounded-lg sm:rounded-xl shadow-lg"
             >
-              <div className="absolute top-2 left-2 p-2 text-gray-700 font-semibold">{easterEgg.date}</div>
-              <button onClick={() => setEasterEgg(null)} className="absolute top-2 right-2 bg-gray-200 rounded-full p-2 hover:bg-gray-300">
-                <X size={20} />
+              <div className="absolute top-1 left-1 sm:top-2 sm:left-2 p-1 sm:p-2 text-xs sm:text-sm text-gray-700 font-semibold">
+                {easterEgg.date}
+              </div>
+              <button 
+                onClick={() => setEasterEgg(null)} 
+                className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-gray-200 rounded-full p-1 sm:p-2 hover:bg-gray-300"
+              >
+                <X size={16} className="sm:w-5 sm:h-5" />
               </button>
-              <div className="text-2xl font-bold text-gray-700 mt-4">{easterEgg.message}</div>
+              <div className="text-xl sm:text-2xl font-bold text-gray-700 mt-4 text-center">
+                {easterEgg.message}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
