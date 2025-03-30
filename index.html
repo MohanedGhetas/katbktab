@@ -5,18 +5,110 @@
     <link rel="icon" type="image/svg+xml" href="/heart.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:title" content="Engagement" />
-    <meta property="og:description" content="Join us in counting down to our special day!" />
+    <meta property="og:description" content="Join us on our special day!" />
     <meta property="og:image" content="https://katbktab.vercel.app/assets/sora3-CATwmJMs.jpg" />
     <meta property="og:url" content="test" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="https://katbktab.vercel.app/assets/sora3-CATwmJMs.jpg">
     <meta name="twitter:title" content="Engagement">
-    <meta name="twitter:description" content="Join us in counting down to our special day!">
+    <meta name="twitter:description" content="Join us on our special day!">
     <meta name="twitter:image" content="https://katbktab.vercel.app/assets/sora3-CATwmJMs.jpg">
     <title>Engagement</title>
+    <style>
+      /* Loader Styles */
+      #welcome-loader {
+        position: fixed;
+        inset: 0;
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+        padding: 0 40px;
+      }
+      .fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .dash {
+        animation: dashArray 2s ease-in-out infinite, dashOffset 2s linear infinite;
+      }
+      @keyframes dashArray {
+        0% { stroke-dasharray: 0 1 359 0; }
+        50% { stroke-dasharray: 0 359 1 0; }
+        100% { stroke-dasharray: 359 1 0 0; }
+      }
+      @keyframes dashOffset {
+        0% { stroke-dashoffset: 365; }
+        100% { stroke-dashoffset: 5; }
+      }
+    </style>
   </head>
   <body>
+    <!-- Welcome Loader -->
+    <div id="welcome-loader">
+      <svg height="0" width="0">
+        <defs>
+          <linearGradient id="b" x1="0" y1="62" x2="0" y2="2" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#973BED"></stop>
+            <stop stop-color="#007CFF" offset="1"></stop>
+          </linearGradient>
+          <linearGradient id="c" x1="0" y1="64" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFC800"></stop>
+            <stop stop-color="#F0F" offset="1"></stop>
+            <animateTransform attributeName="gradientTransform" type="rotate"
+              values="0 32 32;-270 32 32;-540 32 32;-810 32 32;-1080 32 32"
+              keyTimes="0;0.25;0.5;0.75;1" dur="8s" repeatCount="indefinite">
+            </animateTransform>
+          </linearGradient>
+          <linearGradient id="d" x1="0" y1="62" x2="0" y2="2" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00E0ED"></stop>
+            <stop stop-color="#00DA72" offset="1"></stop>
+          </linearGradient>
+        </defs>
+      </svg>
+      <!-- WELCOME Letters -->
+      <svg viewBox="0 0 64 64" height="64" width="64">
+        <path stroke="url(#b)" d="M 4,4 L 16,60 L 32,20 L 48,60 L 60,4" class="dash" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+      <svg viewBox="0 0 64 64" height="64" width="64">
+        <path stroke="url(#c)" d="M 50,4 H 4 V 60 H 50 M 4,32 H 40" class="dash" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+      <svg viewBox="0 0 64 64" height="64" width="64">
+        <path stroke="url(#d)" d="M 14,4 V 60 H 50" class="dash" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+      <svg viewBox="0 0 64 64" height="64" width="64">
+        <path stroke="url(#b)" d="M 50,15 A 25,25 0 1 0 50,49" class="dash" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+      <svg viewBox="0 0 64 64" height="64" width="64">
+        <path stroke="url(#c)" d="M 32 32 m 0 -27 a 27 27 0 1 1 0 54 a 27 27 0 1 1 0 -54" class="dash" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+      <svg viewBox="0 0 64 64" height="64" width="64">
+        <path stroke="url(#d)" d="M 4,60 V 4 L 32,40 L 60,4 V 60" class="dash" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+      <svg viewBox="0 0 64 64" height="64" width="64">
+        <path stroke="url(#b)" d="M 50,4 H 4 V 60 H 50 M 4,32 H 40" class="dash" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+    </div>
+
+    <!-- React App Root -->
     <div id="root"></div>
+
+    <!-- JavaScript to Remove Loader -->
+    <script>
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          const loader = document.getElementById("welcome-loader");
+          if (loader) {
+            loader.classList.add("fade-out");
+            setTimeout(() => loader.remove(), 500);
+          }
+        }, 500); 
+      });
+    </script>
+
     <script type="module" src="/src/App.tsx"></script>
   </body>
 </html>
